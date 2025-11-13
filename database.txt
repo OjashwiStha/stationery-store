@@ -1,0 +1,99 @@
+-- USERS TABLE
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    address TEXT
+);
+
+-- CATEGORIES TABLE
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- PRODUCTS TABLE
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255),
+    category_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+-- ORDERS TABLE
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_email VARCHAR(100),
+    customer_phone VARCHAR(20),
+    customer_address TEXT,
+    total_price DECIMAL(10,2) NOT NULL,
+    payment_mode VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- FIXED ORDER_ITEMS TABLE (product_id is nullable for ON DELETE SET NULL)
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+ALTER TABLE users ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
+
+
+-- ADS TABLE
+CREATE TABLE ads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255) NOT NULL,
+    link VARCHAR(255),
+    position ENUM('left', 'right') DEFAULT 'right'
+);
+
+
+INSERT INTO users (name, email, password, role)
+VALUES ('Admin User', 'admin@example.com', '$2y$10$UFTHyAmFV0.IBuwLP8ghVuNjLS6hH53LFDIGmM/fJDyT38Wc0Z0qW', 'admin');
+
+
+-- -------------------------------
+-- 🔽 TEST DATA INSERTS
+-- -------------------------------
+
+-- Insert Categories
+INSERT INTO categories (name) VALUES 
+('Pens'), 
+('Notebooks'), 
+('Art Supplies');
+
+-- Insert Products
+INSERT INTO products (name, description, price, image, category_id) VALUES 
+('Blue Ball Pen', 'Smooth writing blue pen', 10.00, 'pen1.jpg', 1),
+('A5 Notebook', '100 pages ruled notebook', 50.00, 'notebook1.jpg', 2),
+('Color Pencils Set', '12 color pencils for drawing', 120.00, 'colorset.jpg', 3),
+('Black Gel Pen', 'Premium gel pen', 15.00, 'gelpen.jpg', 1);
+
+-- Insert User
+INSERT INTO users (name, email, password, phone, address) VALUES 
+('John Doe', 'john@example.com', '123456', '9876543210', '123 Main St, City');
+
+-- Insert Order
+INSERT INTO orders (user_id, customer_name, customer_email, customer_phone, customer_address, total_price, payment_mode) VALUES 
+(1, 'John Doe', 'john@example.com', '9876543210', '123 Main St, City', 175.00, 'Cash on Delivery');
+
+-- Insert Order Items
+INSERT INTO order_items (order_id, product_id, quantity, price) VALUES 
+(1, 1, 2, 10.00),  -- 2 Blue Ball Pens
+(1, 2, 1, 50.00),  -- 1 A5 Notebook
+(1, 3, 1, 120.00); -- 1 Color Pencil Set
