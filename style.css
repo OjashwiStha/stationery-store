@@ -1,4 +1,4 @@
-/* ==== Global Reset ==== */
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -14,28 +14,21 @@ body {
 
 .container {
   width: 90%;
-  max-width: 1100px;
+  /* max-width: 1100px; */
   /* margin: auto; */
   padding-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* ==== Header ==== */
+/* Header */
 header {
-  /* background-color: #4e73df; */
-  /* background-color: rgb(209, 214, 221) ; */
   padding: 5px 0;
-  /* color: white; */
-  /* color: rgb(35, 142, 69); */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header .container {
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
-}
-
-header h1 a {
+.logo a {
   /* color: white; */
   color: rgb(43, 65, 100);
   text-decoration: none;
@@ -43,7 +36,7 @@ header h1 a {
   font-weight: bold;
 }
 
-nav a {
+.nav-right a {
   /* color: white; */
   color: rgb(43, 65, 100);
   text-decoration: none;
@@ -52,12 +45,12 @@ nav a {
   transition: color 0.3s;
 }
 
-nav a:hover {
+.nav-right a:hover {
   color: rgb(43, 65, 100);
   /* color: #ffc107; */
 }
 
-/* ==== Footer ==== */
+/* Footer */
 footer {
   background-color: #f8f9fc;
   padding: 20px 0;
@@ -68,7 +61,7 @@ footer {
   border-top: 1px solid #ddd;
 }
 
-/* ==== Buttons ==== */
+/* Buttons */
 .btn {
   display: inline-block;
   background-color:  rgb(43, 65, 100);
@@ -86,7 +79,7 @@ footer {
   background-color: rgb(43, 65, 100);
 }
 
-/* ==== Product Grid ==== */
+/* Product Grid */
 .product-grid {
   display: flex;
   flex-wrap: wrap;
@@ -122,7 +115,7 @@ footer {
   color: rgb(43, 65, 100);
 }
 
-/* ==== Product Detail Page ==== */
+/* Product Detail Page */
 .product-details {
   display: flex;
   gap: 30px;
@@ -161,7 +154,7 @@ input[type="number"] {
   margin-right: 10px;
 }
 
-/* ==== Search Form ==== */
+/* Search Form */
 form {
   text-align: center;
   margin: 20px 0;
@@ -175,7 +168,7 @@ form select {
   border-radius: 5px;
 }
 
-/* ==== Cart Table ==== */
+/* Cart Table */
 .cart-table {
   width: 90%;
   margin: auto;
@@ -198,7 +191,7 @@ form select {
   text-decoration: none;
 }
 
-/* ==== Admin Dashboard Cards ==== */
+/* Admin Dashboard Cards */
 .dashboard-box {
   flex: 1;
   background: #f9f9f9;
@@ -212,7 +205,7 @@ form select {
   margin-bottom: 10px;
 }
 
-/* ==== Ads Section ==== */
+/* Ads Section */
 .ad-box {
   display: block !important;
   visibility: visible !important;
@@ -227,7 +220,7 @@ form select {
   border-radius: 10px;
 }
 
-/* ==== Responsive ==== */
+/* Responsive */
 @media (max-width: 768px) {
   .product-details {
     flex-direction: column;
@@ -262,7 +255,7 @@ form select {
 }
 
 
-/* ==== Auth Pages (Login/Register) ==== */
+/* Auth Pages (Login/Register) */
 .auth-container {
   max-width: 400px;
   margin: 40px auto;
