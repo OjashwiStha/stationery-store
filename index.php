@@ -1,6 +1,11 @@
 <?php
 session_start();
 include 'db.php';
+
+// for dynamic seo
+$pageTitle = "Online Stationery Store: Best Prices For All Stationey Products";
+$metaDescription = "Get best deals for all netebooks, pens, art supplies and all stationery products."; 
+
 include 'header.php';
 ?>
 
@@ -22,17 +27,17 @@ include 'header.php';
     <!-- <select name="price_range">
         <option value="">All Prices</option>
         <option value="0-100" <?php //if ($_GET['price_range'] == '0-100') echo 'selected'; ?>>Under NRP100</option>
-        <option value="100-500" <?php// if ($_GET['price_range'] == '100-500') echo 'selected'; ?>>NRP100 - NRP500</option>
+        <option value="100-500" <php// if ($_GET['price_range'] == '100-500') echo 'selected'; ?>>NRP100 - NRP500</option>
         <option value="500-1000" <?php //if ($_GET['price_range'] == '500-1000') echo 'selected'; ?>>NRP500 - NRP1000</option>
     </select> -->
 
     <button type="submit" class="btn">Search</button>
 </form><br>
 
-<!-- 🧱 Main Layout: Products + Ads -->
+<!-- Main Layout: Products + Ads -->
 <div style="display: flex; gap: 20px; align-items: flex-start; padding: 20px;">
 
-    <!-- 🛍️ Left: Product Listings -->
+    <!-- Left: Product Listings -->
     <div style="flex: 3;">
         <h2>Our Latest Products</h2><br>
 
@@ -62,11 +67,10 @@ include 'header.php';
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='product-card'>";
-                echo "<img src='uploads/{$row['image']}' alt='{$row['name']}'>";
+                echo "<img src='uploads/{$row['image']}' alt='{$row['name']} online at best price'>";
                 echo "<a href='product.php?id={$row['id']}' class='product_detl'><h3>{$row['name']}</h3></a>";
-                // echo "<h3>{$row['name']}</h3>";
                 echo "<p>NRP" . number_format($row['price'], 2) . "</p>";
-                // echo "<a href='product.php?id={$row['id']}' class='btn'>View</a>";
+                echo "<a href='product.php?id={$row['id']}' class='btn'>View</a>";
                 echo "</div>";
             }
         } else {
@@ -76,7 +80,7 @@ include 'header.php';
         </div>
     </div>
 
-    <!-- 📢 Right: Ads Sidebar -->
+    <!-- Right: Ads Sidebar -->
     <div style="flex: 1;">
         <h3>📢 Sponsored</h3>
         <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -85,7 +89,7 @@ include 'header.php';
             <!-- <img src="assets/images/ads/ad3.jpg" alt="Ad 3" style="width: 100%; border-radius: 10px;"> -->
         </div>
 
-        <!-- 📢 Right: Ads Sidebar -->
+        <!-- Right: Ads Sidebar -->
         <!-- <div style="flex: 1;">
             <h3>📢 Sponsored</h3>
             <div style="display: flex; flex-direction: column; gap: 15px;">

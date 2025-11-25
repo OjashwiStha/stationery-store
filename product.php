@@ -30,7 +30,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 <div class="product-details">
     <div class="product-img">
-        <img src="uploads/<?php echo $product['image']; ?>" alt="Product Image">
+        <img src="uploads/<?php echo $product['image']; ?>" alt="<?php echo $product['name'] . "- " .$product['description'] ?>">
     </div>
     <div class="product-info">
         <h2><?php echo $product['name']; ?></h2>
@@ -57,6 +57,7 @@ $rec_q = mysqli_query($conn, "SELECT * FROM products WHERE category_id = $cat_id
 while ($rec = mysqli_fetch_assoc($rec_q)) {
 ?>
     <div class="product-card">
+        <img src="uploads/<?php echo $product['image']; ?>" alt="<?php echo $rec['name'] . "- " .$rec['description'] ?>">
         <h4><?php echo $rec['name']; ?></h4>
         <p>NRP<?php echo number_format($rec['price'], 2); ?></p>
         <a href="product.php?id=<?php echo $rec['id']; ?>" class="btn">View</a>
